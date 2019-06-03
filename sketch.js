@@ -16,15 +16,15 @@ function setup() {
   //draw the variable bumpers
 
 if (level == 1){
-  let bumper1 = new Bumper(100,400,0,.75);
+  let bumper1 = new Bumper(100,400,0,.75,"orange");
 
   bumpers.push(bumper1);
   console.log(bumper1);
 
-  let bumper2 = new Bumper(650,300,0,-.5);
+  let bumper2 = new Bumper(650,300,0,-.5,"blue");
   bumpers.push(bumper2);
 
-  let bumper3 = new Bumper(400,400,0,0);
+  let bumper3 = new Bumper(400,400,0,0,"green");
   bumpers.push(bumper3);
 
 }
@@ -43,7 +43,7 @@ function draw(){
   }
 
   if (level ==2){
-    bucket(500,750);
+    bucket(530,750);
   }
 
   print(hitcount);
@@ -69,18 +69,30 @@ function draw(){
     if (hitcount == 1 && level==1) {
          print("Level Completed");
          died = true
-         textSize(32);
-         fill("red")
+         textSize(25);
+         fill("green")
          noStroke();
          text('Level 1 Completed',10,47);
          text('Press Space key for next level',10,75);
        }
+       if (hitcount == 2 && level==2) {
+            print("Level Completed, good job!");
+            died = true
+            textSize(25);
+            fill("blue")
+            noStroke();
+            text('Level 2 Completed',10,47);
+
+          }
   }
 
 
 function keyPressed(){ //every time you push a key, make a new ball from the ball class and add it to the balls array
   if(keyCode=== 32 && hitcount ==1){
     level=2;
+    let bumper4 = new Bumper(450,250,50,0, "purple");
+    //fill("purple")
+    bumpers.push(bumper4);
 
 
   }
@@ -119,18 +131,19 @@ function Gametimer() {
 }
 
 class Bumper {
-	constructor(x,y, hitcount,angle){
+	constructor(x,y, hitcount,angle,color){
 		    this.x = x;
     		this.y = y;
         this.hitcount = hitcount;
         this.angle = angle
+        this.color = color;
 	}
 
   drawbumper(){
     push();
     translate(this.x, this.y)
     rotate(this.angle);
-    fill("red")
+    fill(this.color)
     rect(0,0,160,40)
     pop();
 
@@ -176,16 +189,18 @@ class Ball {
       if(this.x>=180 && this.x<=220 && this.y > 750 && this.scored == false){
         hitcount = hitcount +1;
         this.scored = true;
-      //  level = 2;
+       }
     }
     if (level ==2 ){
-
-
+      if(this.x>=530 && this.x<=750 && this.y > 750 && this.scored == false){
+        hitcount = hitcount +1;
+        this.scored = true;
+      }
     }
 
 
 
-    }
+
 
 
   }
