@@ -1,47 +1,84 @@
 let balls = [];
 let bumpers = [];
 // let bumper;
-
+let hitcount = 0;
+let timer = 0;
+let me;
+let died = false;
+let level = 1;
 
 function setup() {
   createCanvas(800, 800);
   rectMode(CENTER);
 
+  //make one avatar called me
+  // me = new Bucket(width/50, 34, 20 ,0);
   //draw the variable bumpers
 
-    let bumper1 = new Bumper(100,400,0,.75);
-    //hi
-    bumpers.push(bumper1);
-    console.log(bumper1);
+if (level == 1){
+  let bumper1 = new Bumper(100,400,0,.75);
 
-    let bumper2 = new Bumper(650,300,0,-.5);
-    bumpers.push(bumper2);
+  bumpers.push(bumper1);
+  console.log(bumper1);
 
-    let bumper3 = new Bumper(400,400,0,0)
-    bumpers.push(bumper3);
+  let bumper2 = new Bumper(650,300,0,-.5);
+  bumpers.push(bumper2);
+
+  let bumper3 = new Bumper(400,400,0,0);
+  bumpers.push(bumper3);
+
+}
+  if (level == 2){
+
+
+  }
+
+
 
 
 }
+
 function draw(){
 	background(220);
+  if (level == 1){
+      bucket(200,750);
+  }
 
-for (let i=0; i<bumpers.length; i++){
-  bumpers[i].drawbumper();
-}
+  print(hitcount);
+
+  // me.drawMe();
+  // me.die();
+  Gametimer();
+
+   for (let i=0; i<bumpers.length; i++){
+     bumpers[i].drawbumper();
+   }
 
 //	draw all the balls in that array
 	for (let i = 0; i < balls.length; i++) {
 	      balls[i].drawBall();
         balls[i].moveBall();
         balls[i].bounceBall();
+        balls[i].score();
 
 	  }
-}
+
+
+    if (hitcount == 1) {
+         print("Level Completed");
+         died = true
+         textSize(32);
+         fill("red")
+         noStroke();
+         text('Level Completed',10,47);
+       }
+  }
+
 
 function keyPressed(){ //every time you push a key, make a new ball from the ball class and add it to the balls array
 
   if (keyCode === ENTER) {
-    let  b = new Ball(400, 20,2,false);
+    let  b = new Ball(400, 20,2,false, false);
     balls.push(b);
   //  console.log(balls);
    }
@@ -53,6 +90,22 @@ function keyPressed(){ //every time you push a key, make a new ball from the bal
 
       }
    }
+}
+
+function Gametimer() {
+
+  noStroke();
+  fill("red");
+  textAlign(0, 10);
+  textSize(30);
+  text(timer, 650, 40);
+
+
+  if (died == false){
+    if (frameCount % 60 == 0 && timer >= 0) { // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+      timer ++;
+    }
+  }
 }
 
 class Bumper {
@@ -79,11 +132,12 @@ class Bumper {
 //ball class from which to create new balls with similar properties.
 class Ball {
 
-	constructor(x,y,speed,falling){ //every ball needs an x value and a y value
+	constructor(x,y,speed,falling,scored){ //every ball needs an x value and a y value
 		    this.x = x;
     		this.y = y;
        this.speed = speed;
        this.falling = falling;
+       this.scored = scored;
 	}
 
 	drawBall(){  // draw a ball on the screen at x,y
@@ -107,7 +161,21 @@ class Ball {
     }
 	}
 
-  fall(){
+  score(){
+    if(level == 1){
+      if(this.x>=180 && this.x<=220 && this.y > 750 && this.scored == false){
+        hitcount = hitcount +1;
+        this.scored = true;
+        level = 2;
+    }
+    if (level ==2 ){
+
+
+    }
+
+
+
+    }
 
 
   }
@@ -123,3 +191,37 @@ class Ball {
     }
 
 }
+
+function bucket(x,y){
+
+  fill("red")
+  rect(x,y,40,40)
+
+}
+//avatar class
+// class Bucket {
+//
+// 	constructor(x,y,hitcount){ //every avatar needs an x value, a y value, and a speed
+// 		    this.x = x;
+//     		this.y = y;
+//         this.hitcount = hitcount;
+// 	}
+//
+//   drawMe(){
+//     fill("red")
+//     rect(200,750,50,50)
+//
+//   }
+//
+//
+//   die(){
+//     if (hitcount == 1) {
+//       print("Level Completed");
+//       died = true
+//       textSize(32);
+//       fill("red")
+//       noStroke();
+//       text('Level Completed',10,47);
+//     }
+// }
+// }
