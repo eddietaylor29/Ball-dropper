@@ -45,6 +45,10 @@ function draw(){
       bucket(200,750);
   }
 
+  if (level ==2){
+    bucket(500,750);
+  }
+
   print(hitcount);
 
   // me.drawMe();
@@ -65,18 +69,26 @@ function draw(){
 	  }
 
 
-    if (hitcount == 1) {
+    if (hitcount == 1 && level==1) {
          print("Level Completed");
          died = true
          textSize(32);
          fill("red")
          noStroke();
-         text('Level Completed',10,47);
+         text('Level 1 Completed, Press Space key for next level',10,47);
+
        }
   }
 
 
 function keyPressed(){ //every time you push a key, make a new ball from the ball class and add it to the balls array
+  if(keyCode=== 32){
+    level=2;
+
+
+  }
+
+
 
   if (keyCode === ENTER) {
     let  b = new Ball(400, 20,2,false, false);
@@ -167,7 +179,7 @@ class Ball {
       if(this.x>=180 && this.x<=220 && this.y > 750 && this.scored == false){
         hitcount = hitcount +1;
         this.scored = true;
-        level = 2;
+      //  level = 2;
     }
     if (level ==2 ){
 
