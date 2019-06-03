@@ -34,8 +34,6 @@ if (level == 1){
   }
 
 
-
-
 }
 
 function draw(){
@@ -74,14 +72,14 @@ function draw(){
          textSize(32);
          fill("red")
          noStroke();
-         text('Level 1 Completed, Press Space key for next level',10,47);
-
+         text('Level 1 Completed',10,47);
+         text('Press Space key for next level',10,75);
        }
   }
 
 
 function keyPressed(){ //every time you push a key, make a new ball from the ball class and add it to the balls array
-  if(keyCode=== 32){
+  if(keyCode=== 32 && hitcount ==1){
     level=2;
 
 
@@ -210,30 +208,3 @@ function bucket(x,y){
   rect(x,y,40,40)
 
 }
-//avatar class
-// class Bucket {
-//
-// 	constructor(x,y,hitcount){ //every avatar needs an x value, a y value, and a speed
-// 		    this.x = x;
-//     		this.y = y;
-//         this.hitcount = hitcount;
-// 	}
-//
-//   drawMe(){
-//     fill("red")
-//     rect(200,750,50,50)
-//
-//   }
-//
-//
-//   die(){
-//     if (hitcount == 1) {
-//       print("Level Completed");
-//       died = true
-//       textSize(32);
-//       fill("red")
-//       noStroke();
-//       text('Level Completed',10,47);
-//     }
-// }
-// }
