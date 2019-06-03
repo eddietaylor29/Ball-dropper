@@ -29,7 +29,8 @@ if (level == 1){
 
 }
   if (level == 2){
-
+let bumper4 = new Bumper(200,50,50,0);
+bumpers.push(bumper4);
 
   }
 
