@@ -71,12 +71,21 @@ function draw(){
     if (hitcount == 1 && level==1) {
          print("Level Completed");
          died = true
-         textSize(32);
-         fill("red")
+         textSize(25);
+         fill("green")
          noStroke();
          text('Level 1 Completed, Press Space key for next level',10,47);
 
        }
+       if (hitcount == 2 && level==2) {
+            print("Level Completed, good job!");
+            died = true
+            textSize(25);
+            fill("blue")
+            noStroke();
+            text('Level 2 Completed',10,47);
+
+          }
   }
 
 
@@ -182,16 +191,18 @@ class Ball {
       if(this.x>=180 && this.x<=220 && this.y > 750 && this.scored == false){
         hitcount = hitcount +1;
         this.scored = true;
-      //  level = 2;
+       }
     }
     if (level ==2 ){
-
-
+      if(this.x>=530 && this.x<=750 && this.y > 750 && this.scored == false){
+        hitcount = hitcount +1;
+        this.scored = true;
+      }
     }
 
 
 
-    }
+
 
 
   }
